@@ -1,6 +1,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -19,8 +20,12 @@ require('lazy').setup({
   'ThePrimeagen/harpoon',
   'mbbill/undotree',
 
-  'jiangmiao/auto-pairs',
+  -- 'jiangmiao/auto-pairs',
   'windwp/nvim-ts-autotag',
+  {
+    "windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
+  },
 
   'github/copilot.vim',
 
@@ -265,9 +270,6 @@ vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz')
 vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz')
 vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz')
 
--- Toggle netrw treeview
-vim.keymap.set('n', '<leader>da', ':Lexplore<CR>')
-vim.keymap.set('n', '<leader>dd', ':Lexplore %:p:h<CR>')
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -641,5 +643,4 @@ vim.cmd('autocmd FileType javascript setlocal omnifunc=v:lua.vim.lsp.omnifunc')
 vim.cmd('autocmd FileType typescript setlocal omnifunc=v:lua.vim.lsp.omnifunc')
 vim.cmd('autocmd FileType javascriptreact setlocal omnifunc=v:lua.vim.lsp.omnifunc')
 vim.cmd('autocmd FileType typescriptreact setlocal omnifunc=v:lua.vim.lsp.omnifunc')
-
 
